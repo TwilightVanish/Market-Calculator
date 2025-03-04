@@ -1,0 +1,26 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Log into Harbor
+        uses: docker/login-action@v3.2.0
+        with:
+          registry: harbor.imlisa.nl
+          username: ${{ secrets.HARBOR_USERNAME }}
+          password: ${{ secrets.HARBOR_ACCESS_TOKEN }}
+
+      - name: Build Docker image
+        run: docker build -t harbor.imlisa.nl/marketcalculator/marketcalculator:latest .
+
+      - name: Push image to Docker Hub
+        run: docker push harbor.imlisa.nl/marketcalculator/marketcalculator:latest

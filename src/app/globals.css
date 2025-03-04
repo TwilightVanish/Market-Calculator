@@ -1,42 +1,87 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --header-height: 60px;
+  --input-bg: #1e1e1e;
+  --bg-color: #0A0A0A;
+  --surface-color: #161616;
+  --accent-color: #6A0DAD;
+  --accent-light: #9D4EDD;
+  --hover-color: #521A8B;
+  --border-color: #2E2E2E;
+  --text-primary: #EAE2F8;
+  --text-secondary: #CBB9FF;
+  --error-color: #D72638;
 }
 
 * {
-  box-sizing: border-box;
-  padding: 0;
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+body {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: Arial, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+.layout {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 80px 40px 20px;
+}
+
+.left-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.textarea {
+  width: 100%;
+  height: 200px;
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  padding: 10px;
+  font-size: 14px;
+  resize: vertical;
+}
+
+.right-panel {
+  flex: 2;
+  background-color: var(--input-bg);
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+}
+
+.data-grid-header {
+  background-color: #1a1625;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.even-row {
+  background-color: #1a1a1a;
+}
+
+.login-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  animation: blinker 5s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
   }
+}
+
+.item-image {
+  vertical-align: middle;
 }
