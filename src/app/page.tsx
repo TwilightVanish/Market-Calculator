@@ -29,15 +29,20 @@ export default function Home() {
             .split('\n')
             .map(line => {
                 const [part1 = '', part2 = ''] = line.trim().split('\t');
-                const quantity1 = /^\d+$/.test(part1) ? parseInt(part1) : null;
-                const quantity2 = /^\d+$/.test(part2) ? parseInt(part2) : null;
+                const numberRegex = /^\d{1,3}(?:,\d{3})*$/;
 
-                if (quantity1 && part2) return { name: part2.trim(), quantity: quantity1 };
-                if (quantity2 && part1) return { name: part1.trim(), quantity: quantity2 };
+                const parseNumber = (str: string) =>
+                    numberRegex.test(str) ? parseInt(str.replace(/,/g, ''), 10) : null;
+
+                const quantity1 = parseNumber(part1);
+                const quantity2 = parseNumber(part2);
+
+                if (quantity1 !== null && part2) return { name: part2.trim(), quantity: quantity1 };
+                if (quantity2 !== null && part1) return { name: part1.trim(), quantity: quantity2 };
 
                 return null;
             })
-            .filter(x => x && x.quantity > 0) as { name: string; quantity: number }[]
+            .filter(x => x && x.quantity > 0) as { name: string; quantity: number }[];
 
         const nameToQuantity = new Map(lines.map(({name, quantity}) => [name, quantity]));
         const priceData = await getDataForNames([...nameToQuantity.keys()]);
