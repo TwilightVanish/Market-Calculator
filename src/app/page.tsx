@@ -29,7 +29,7 @@ export default function Home() {
             .split('\n')
             .map(line => {
                 const [part1 = '', part2 = ''] = line.trim().split('\t');
-                const numberRegex = /^\d{1,3}(?:,\d{3})*$/;
+                const numberRegex = /^(\d|,)*$/;
 
                 const parseNumber = (str: string) =>
                     numberRegex.test(str) ? parseInt(str.replace(/,/g, ''), 10) : null;
