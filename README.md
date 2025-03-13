@@ -41,6 +41,7 @@ Access the app at [http://localhost:3000](http://localhost:3000).
 ```
 AUTH_SECRET   // Pre-shared secret for next-auth (required in production)
 NEXTAUTH_URL // Base URL of the deployment (required in production)
+DEFAULT_RATE // Default rate for items, 90 by default (Optional)
 ```
 
 ### Build and Run

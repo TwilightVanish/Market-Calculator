@@ -3,6 +3,7 @@ import {PriceData} from "@/model/PriceData";
 import {getRates} from "@/services/api/rateService";
 
 const priceCheckUrl = "https://market.fuzzwork.co.uk/aggregates/?region=10000002&types=";
+const DEFAULT_RATE = Number(process.env.DEFAULT_RATE) || 90;
 
 export async function getPriceForTypes(types: Type[]): Promise<PriceData[]> {
     const ids = types.map(t => t.id).join(',');
@@ -15,6 +16,6 @@ export async function getPriceForTypes(types: Type[]): Promise<PriceData[]> {
     return types.map(t => {
         const data = res[t.id];
         const rate = rates.find(r => r.type == t.id)?.percentage;
-        return { type: t, buy: +parseFloat(data.buy.percentile).toFixed(2), sell: +parseFloat(data.sell.percentile).toFixed(2), rate: rate ?? 90}
+        return { type: t, buy: +parseFloat(data.buy.percentile).toFixed(2), sell: +parseFloat(data.sell.percentile).toFixed(2), rate: rate ?? DEFAULT_RATE}
     })
 }
