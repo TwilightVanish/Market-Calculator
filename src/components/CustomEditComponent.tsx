@@ -26,7 +26,7 @@ export default function CustomEditComponent(props: GridRenderEditCellParams) {
         if (!target) return;
 
         const newValue = parseInt(target);
-        if (newValue >= 0 && newValue <= 200) {
+        if (newValue >= 0 && newValue <= 1000) {
             props.api.setEditCellValue({id, field, value: newValue});
         }
     }
