@@ -39,7 +39,7 @@ export default function CustomEditComponent(props: GridRenderEditCellParams) {
             onBlur={handleExit}
             onChange={handleChange}
             min={0}
-            max={200}
+            max={1000}
             step={1}
             style={{
                 width: "100%",
